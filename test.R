@@ -1,4 +1,3 @@
-cat("Hola mundo")
-cat("ekaitz")
+cat("Oier")
+cat("Ekaitz")
 cat("Otto")
-cat("Otto2")
