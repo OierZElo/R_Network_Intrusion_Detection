@@ -1,5 +1,6 @@
 library(tibble)
 library(ggplot2)
+library(readr)
 
 #CARGAR SOLO 1 VEZ
 csv <- read.csv("kddcup.csv")
@@ -16,14 +17,19 @@ colnames(netWorkDataset)[ncol(netWorkDataset)] <- "class"
 
 print(netWorkDataset)
 
+#Eliminar columnas con varianza 0 o casi 0
+
 #OMMIT NA's
 netWorkDataset <- na.omit(netWorkDataset)
+
+#Eliminar duplicados
+netWorkDataset <- unique(netWorkDataset)
 
 # Convertir columnas character a factor
 char_cols <- sapply(netWorkDataset, is.character)
 netWorkDataset[, char_cols] <- lapply(netWorkDataset[, char_cols], as.factor)
 
-# Convertir columnas numéricas con menos de 30 niveles a factor
+# Convertir columnas numéricas con menos de 20 niveles a factor
 num_cols <- sapply(netWorkDataset, is.numeric)
 for (colname in names(netWorkDataset)[num_cols]) {
   if (length(unique(netWorkDataset[[colname]])) < 20) {
@@ -31,9 +37,12 @@ for (colname in names(netWorkDataset)[num_cols]) {
   }
 }
 
-#str(dataset) → Ver tipos de datos y estructura
-#summary(dataset) → Estadísticas básicas, detecta NAs, outliers
-#head(dataset) / tail(dataset) → Visualizar primeras y últimas filas
-#dim(dataset) → Tamaño (filas y columnas)
-#names(dataset) → Nombres de columnas
+int_cols <- sapply(netWorkDataset, is.integer)
+netWorkDataset[int_cols] <- lapply(netWorkDataset[int_cols], as.numeric)
+
+write_csv(netWorkDataset, "kdd_clean.csv")
+
+str(netWorkDataset)#→ Ver tipos de datos y estructura
+dim(netWorkDataset) #→ Tamaño (filas y columnas)
+names(netWorkDataset) #→ Nombres de columnas
 
