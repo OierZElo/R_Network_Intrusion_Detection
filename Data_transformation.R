@@ -31,6 +31,6 @@ print(duration_by_protocol)
 
 #SHOW ATTACKS BY CLASS
 attack_summary <- count(netWorkDataset_clean, class)
-print(attack_summary)
+print(attack_summary, n = 23)
 
 
