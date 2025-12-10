@@ -14,26 +14,6 @@ netWorkDataset[, char_cols] <- lapply(netWorkDataset[, char_cols], as.factor)
 int_cols <- sapply(netWorkDataset, is.integer)
 netWorkDataset[int_cols] <- lapply(netWorkDataset[int_cols], as.numeric)
 
-#WINSONORIZING FUNCTION (FIX GRAPH)
-numeric_cols <- sapply(netWorkDataset, is.numeric)
-winsorize <- function(x) {
-  if (length(unique(x)) < 2) return(x)
-  
-  Q1 <- quantile(x, 0.25, na.rm = TRUE)
-  Q3 <- quantile(x, 0.75, na.rm = TRUE)
-  IQR <- Q3 - Q1
-  
-  if (IQR == 0) return(x)
-  
-  lower <- Q1 - 1.5 * IQR
-  upper <- Q3 + 1.5 * IQR
-  
-  x[x < lower] <- lower
-  x[x > upper] <- upper
-  
-  return(x)
-}
-
 #APPLY FUNCTION FOR ALL COLUMNS
 for (colname in names(netWorkDataset)[numeric_cols]) {
   cat("Procesando outliers en:", colname, "\n")
