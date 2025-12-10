@@ -14,13 +14,6 @@ netWorkDataset[, char_cols] <- lapply(netWorkDataset[, char_cols], as.factor)
 int_cols <- sapply(netWorkDataset, is.integer)
 netWorkDataset[int_cols] <- lapply(netWorkDataset[int_cols], as.numeric)
 
-#APPLY FUNCTION FOR ALL COLUMNS
-for (colname in names(netWorkDataset)[numeric_cols]) {
-  cat("Procesando outliers en:", colname, "\n")
-  netWorkDataset[[colname]] <- winsorize(netWorkDataset[[colname]])
-}
-print(netWorkDataset)
-
 #EXAMPLE GRAPHICS
 boxplot(netWorkDataset$duration, main="Duration winsorizada")
 hist(netWorkDataset$src_bytes, breaks = 50)
