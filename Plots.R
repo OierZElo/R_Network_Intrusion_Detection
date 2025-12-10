@@ -95,7 +95,7 @@ numeric_vars <- c(
 numeric_vars <- numeric_vars[numeric_vars %in% names(netWorkDataset_all)]
 
 ui <- fluidPage(
-  titlePanel("KDD Cup 1999 - Visualizations with PCA"),
+  titlePanel("KDD Cup 1999"),
   sidebarLayout(
     sidebarPanel(
       width = 3,
