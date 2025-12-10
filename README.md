@@ -1,6 +1,5 @@
 KDD CUP 1999 DATA Analysis Report
 
-Authors: Otto Mussnig, Oier Zugazaga, Ekaitz Lazkano
 📄 Introduction
 What is this document?
 
